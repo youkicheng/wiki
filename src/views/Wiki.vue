@@ -14,9 +14,10 @@
     </div>
     <div
       class="collectItem"
+      :class="{isCollected: wikiContent.isCollected}"
       @click="collectItem"
       v-if="wikiPage"
-    >{{isCollected ? '已收藏' : '收藏该词条'}}</div>
+    >{{wikiContent.isCollected ? '已收藏' : '收藏该词条'}}</div>
   </div>
 </template>
 
@@ -28,11 +29,18 @@
     data () {
       return {
         hideLoadingPage: false,
-        isCollected: false,
       }  
     },
     watch: {
-      
+      wikiContent () {
+        this.$nextTick()
+          .then(() => {
+            let {id, title} = this.wikiContent
+             this.$local.recordHistory(id, title)
+          })
+        
+       
+      }
     },
     created () {
       this.dispathWikiPageAjax(this.$route.params.userId)
@@ -41,13 +49,24 @@
       ...mapState({
         wikiPage: state => state.wiki.wikiPage
       }),
-      ...mapGetters(['wikiContent']),
+      ...mapGetters(['wikiContent'])
       
     },
     methods:{
       ...mapActions(['dispathWikiPageAjax']),
-      ...mapMutations(['getWikiPage']),
-     
+      ...mapMutations(['getWikiPage', 'toggleWikiCollectedStatus']),
+      collectItem () {
+        const {set, remove} = this.$local
+        const {id, title, isCollected} = this.wikiContent
+        if(isCollected) {
+          remove(id)
+          this.toggleWikiCollectedStatus(false)
+        } else {
+          set (id, title) 
+          this.toggleWikiCollectedStatus(true)
+        }
+
+      }
      
     }
 
@@ -75,6 +94,12 @@
       background-color: #fff;
       box-shadow: 0 0 1px 1px #999;   
       
+
+    }
+    .isCollected {
+       background-color: blue;
+       box-shadow: 0 0 1px 1px #ececec;
+       color: #fff;
 
     }
   }

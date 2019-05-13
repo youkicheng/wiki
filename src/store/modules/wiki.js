@@ -6,13 +6,17 @@ import axios from 'axios'
  const getters = {
    wikiContent (state) {
      let {wikiPage} = state
+     
+
      if (wikiPage) {
+         
          return {
             title: wikiPage.lead.display, 
             id: wikiPage.lead.id,
             isCollected: wikiPage.isCollected,
             sections: wikiPage.lead.sections,
             remaining: wikiPage.remaining.sections
+            
          }
      }
    }
@@ -21,6 +25,10 @@ import axios from 'axios'
  const mutations = {
    getWikiPage (state, data) {
        state.wikiPage = data
+   },
+   toggleWikiCollectedStatus (state, status) {
+     state.wikiPage.isCollected = status
+     console.log(state.wikiPage)
    }
 
  }

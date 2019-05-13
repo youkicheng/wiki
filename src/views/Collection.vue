@@ -1,7 +1,7 @@
 <template>
   <div class="collection">
     <nav class="collection-nav"> 
-      <div class="collection-favorites">我的收藏</div>
+      <div class="collection-favorites" :favoritesList="favoritesList">我的收藏</div>
       <div class="collection-history">历史</div>
      
     </nav>
@@ -16,7 +16,28 @@ import Favorites from './Favorites.vue'
 export default {
   components: {
     Favorites
+  },
+  data () {
+    return {
+      favoritesList: []
+    }
+  },
+  methods: {
+    getFavorites () {
+      this.favoritesList = []
+      Object.keys(localStorage).forEach(key => {
+        if (key.match(/^\d+$/)) {
+          this.favoritesList.push([key,JSON.parse(this.$local.get(key))])
+        }
+      })
+    },
+    activated () {
+      this.getFavorites()
+    } 
   }
+
+
+
 }
 </script>
 
