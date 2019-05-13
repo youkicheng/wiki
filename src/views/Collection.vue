@@ -3,10 +3,23 @@
     <nav class="collection-nav"> 
       <div class="collection-favorites">我的收藏</div>
       <div class="collection-history">历史</div>
-      <div></div>
+     
     </nav>
+      <div>
+        <Favorites></Favorites>
+      </div>
   </div>
 </template>
+
+<script>
+import Favorites from './Favorites.vue'
+export default {
+  components: {
+    Favorites
+  }
+}
+</script>
+
 <style lang="scss" scoped>
   .collection {
     width: 100%;

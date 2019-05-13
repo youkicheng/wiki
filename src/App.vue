@@ -34,8 +34,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow: scroll;
-  overflow: hidden;
+  
+
   
 }
 #app {
@@ -51,7 +51,9 @@
   z-index: 999;
   left: 0;
   bottom: 0;
+  background-color: #fff;
   border-top: solid 1px #ccc;
+
   > * {
     width: 50px;
     font-size: 10px;
@@ -65,6 +67,7 @@
     }   
     .home-font, .collection-font {
        text-align: center;
+       
     }
  
 

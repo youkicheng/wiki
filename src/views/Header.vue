@@ -1,6 +1,6 @@
 <template>
-  <div class="header">
-    <div class="icon-home"> 
+  <div class="header" :class="{'head-fixed': isfixed}">
+    <div class="icon-home" @click="goHome"> 
       <i class="el-icon-s-home"></i>
     </div>
     
@@ -15,7 +15,19 @@
 </template>
 
 <script>
-
+  export default {
+    data () {
+      return {
+        isfixed: false,
+      }
+    },
+    methods: {
+      goHome () {
+        this.$router.push('/home')
+      }
+    },
+    
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -29,10 +41,12 @@
 
     padding: 6px 10px;
 
-    background-color: #fff;
+   
     position: relative;
     margin-bottom: -10px;
+    z-index: 2;
     
+
    
     .icon-home {
       height: 36px;

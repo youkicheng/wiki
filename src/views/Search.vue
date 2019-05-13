@@ -32,7 +32,7 @@
           v-for="item of searchRealtedOnlyTitleItems"
           :key="item.id"
           class="search-related-item"
-          @click="gotoWiki(item.id, item.title)"
+          @click="gotoWiki(item.title)"
         >   
           {{item.title}}
         </li>
@@ -92,8 +92,10 @@
         this.inputVal = ''
         this.clearSearchRelatedData()
       },
-      gotoWiki (id, title) {
-        this.$router.push(`/wiki/${title}`)
+      gotoWiki (title) {
+      
+        this.$router.push({name:'wiki', params:{userId:title}})
+
       }
     }
   }

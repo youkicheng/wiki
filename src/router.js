@@ -5,6 +5,7 @@ import Search from './views/Search.vue'
 import Collection from './views/Collection.vue'
 import Recommend from './views/Recommend.vue'
 import HotTopic from './views/HotTopic.vue'
+import Wiki from './views/Wiki.vue'
 
 
 Vue.use(Router)
@@ -42,6 +43,11 @@ export default new Router({
       path: '/collection',
       name: 'collection',
       component: Collection
+    },
+    {
+      path: '/wiki/:userId',
+      name: 'wiki',
+      component: Wiki
     }
   ]
 })
